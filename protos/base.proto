@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package protos;
+option go_package = "icar_grpc/protos/gen;gen";
+// Common base request for all entities
+message BaseRequest {
+  string api_key = 1;
+  string empressa = 2;
+  repeated Filter filters = 3; // filters per field
+}
+
+// Common base response
+message BaseResponse {
+  string status = 1;
+  string error_id = 2;
+  string error_message = 3;
+}
+
+enum Operator {
+  OP_UNKNOWN = 0;
+  OP_EQ = 1;
+  OP_NE = 2;
+  OP_GT = 3;
+  OP_GTE = 4;
+  OP_LT = 5;
+  OP_LTE = 6;
+  OP_LIKE = 7;
+  OP_NOTLIKE = 8;
+  OP_IN = 9;
+  OP_NOTIN = 10;
+  OP_ISNULL = 11;
+  OP_NOTNULL = 12;
+}
+
+message Filter {
+  string field = 1;             // e.g. "LastName", "IsCompany"
+  Operator op = 2;              // e.g. OP_LIKE
+  repeated string values = 3;   // one or many values
+}

@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package protos;
+option go_package = "icar_grpc/protos/gen;gen";
+
+import "google/protobuf/timestamp.proto";
+import "base.proto";
+
+// Request for clients
+message GetClientsRequest {
+  BaseRequest base = 1;  // includes api_key, empressa, filters
+}
+
+// Response for clients
+message ClientsResponse {
+  BaseResponse base = 1;
+  repeated Client clients = 2;
+}
+
+message Client {
+  string internal_client_id = 1;
+  string account_type_id = 2;
+  string city = 3;
+  string company_name = 4;
+  string contract = 5;
+  string email = 6;
+  string first_name = 7;
+  string fiscal_number = 8;
+  bool is_account_locked = 9;
+  bool is_company = 10;
+  string last_name = 11;
+  string last_name2 = 12;
+  google.protobuf.Timestamp last_update_date = 13;
+  string national_id = 14;
+  string phone = 15;
+  string siren = 16;
+  string vat_number = 17;
+  bool is_active = 18;
+}
+
+// Request for creating a new client
+message CreateClientRequest {
+  BaseRequest base = 1;  // includes api_key, empressa
+  Client client = 2;     // client data to create
+}
+
+// Response for client creation
+message CreateClientResponse {
+  BaseResponse base = 1;
+  string client_id = 2;  // ID of the newly created client
+}
+
+// Request for updating an existing client
+message UpdateClientRequest {
+  BaseRequest base = 1;  // includes api_key, empressa
+  Client client = 2;     // client data to update
+}
+
+// Response for client update
+message UpdateClientResponse {
+  BaseResponse base = 1;
+  bool success = 2;      // whether the update was successful
+}
+
+service ClientService {
+  rpc GetClients(GetClientsRequest) returns (ClientsResponse);
+  rpc CreateClient(CreateClientRequest) returns (CreateClientResponse);
+  rpc UpdateClient(UpdateClientRequest) returns (UpdateClientResponse);
+}
