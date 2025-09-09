@@ -7,7 +7,7 @@ import (
 
 	"google.golang.org/grpc"
 
-	pb "github.com/icar_grpc/protos/gen"
+	pb "github.com/Dyngela/icar_grpc/protos/gen"
 )
 
 func main() {

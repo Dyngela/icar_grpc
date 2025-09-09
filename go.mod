@@ -1,4 +1,4 @@
-module icar_grpc
+module github.com/Dyngela/icar_grpc
 
 go 1.25
 

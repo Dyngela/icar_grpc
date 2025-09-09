@@ -6,8 +6,8 @@ import (
 	"log"
 	"net"
 
+	pb "github.com/Dyngela/icar_grpc/protos/gen"
 	"google.golang.org/grpc"
-	pb "icar_grpc/protos/gen"
 )
 
 // Implement the ClientServiceServer interface
